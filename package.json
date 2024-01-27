@@ -4,7 +4,8 @@
   "description": "",
   "main": "api/index.js",
   "scripts": {
-    "serve": "node api/index.js"
+    "serve": "node api/index.js",
+    "vercel-build": "echo hello" 
   },
   "author": "",
   "license": "ISC",
