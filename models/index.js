@@ -26,7 +26,7 @@ async function main() {
   const silence = new Kitten({ name: 'Silence' });
   console.log(silence.name, '111111'); // 'Silence'
 
-  const fluffy = new Kitten({ name: 'f33333' });
+  const fluffy = new Kitten({ name: 'f32223333' });
   fluffy.speak(); // 
 
   await fluffy.save();
