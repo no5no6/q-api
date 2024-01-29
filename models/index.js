@@ -7,7 +7,8 @@ main().catch(err => console.log(err));
 async function main() {
   console.log('====11111111')
 
-  mongoose.connect(process.env.MONGODB_URI)
+  // mongoose.connect(process.env.MONGODB_URI)
+  mongoose.connect('mongodb+srv://vercel-admin-user:PT3dc4CLsQpOBfEJ@no5no6.6ekwral.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
 
 
   const kittySchema = new mongoose.Schema({
@@ -26,7 +27,7 @@ async function main() {
   const silence = new Kitten({ name: 'Silence' });
   console.log(silence.name, '111111'); // 'Silence'
 
-  const fluffy = new Kitten({ name: 'f32223333' });
+  const fluffy = new Kitten({ name: 'tommmmmm' });
   fluffy.speak(); // 
 
   await fluffy.save();
