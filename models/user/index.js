@@ -9,4 +9,15 @@ const user = {
   organization: String
 }
 
+
+
 const userSchema = new Schema(user)
+
+userSchema.statics.retrieve = async function(items) {
+  console.log('进入')
+  const res = await this.find()
+  console.log(res)
+  return res
+}
+
+module.exports = userSchema

@@ -1,12 +1,40 @@
 const mongoose = require('mongoose');
-const UserSchema = require('./user')
+// const UserSchema = require('./user')
+// console.log(UserSchema, 'UserSchema')
 
-
-main().then(()=> console.log('连接成功')).catch(err => console.log('errooooooo------------',err));
+main().catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect(`mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@no5no6.6ekwral.mongodb.net/?retryWrites=true&w=majority'`)
-  console.log('vercel dev --bug')
+  console.log('====11111111')
+
+  mongoose.connect(process.env.MONGODB_URI)
+
+
+  const kittySchema = new mongoose.Schema({
+    name: String
+  });
+
+  kittySchema.methods.speak = function speak() {
+    const greeting = this.name
+      ? 'Meow name is ' + this.name
+      : 'I don\'t have a name';
+    console.log(greeting);
+  };
+
+  const Kitten = mongoose.model('Kitten', kittySchema);
+
+  const silence = new Kitten({ name: 'Silence' });
+  console.log(silence.name, '111111'); // 'Silence'
+
+  const fluffy = new Kitten({ name: 'f33333' });
+  fluffy.speak(); // 
+
+  await fluffy.save();
+  fluffy.speak();
+
+  const kittens = await Kitten.find();
+  console.log(kittens);
 }
 
-const User = mongoose.model('User', UserSchema);
+
+
