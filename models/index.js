@@ -1,13 +1,16 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
-const userSchema = require('./user/index')
+module.exports = async function () {
 
-main().catch(err => console.log(err));
+  mongoose.connect(process.env.MONGODB_URI)
 
-async function main() {
+  // const User = mongoose.model('User', userSchema)
+  // const Questionnaire = mongoose.model('Questionnaire', questionnaireEachSchema)
 
-  mongoose.connect(process.env.MONGODB_URI);
+  // const connection = mongoose.createConnection(process.env.MONGODB_URI)
 
-  app.models.User = mongoose.model('User', userSchema);
+  // const User = connection.model('User', userSchema)
+  // const Questionnaire = connection.model('Questionnaire', questionnaireEachSchema)
 
+  // return { User, Questionnaire }
 }

@@ -1,11 +1,14 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
+import event from '../shared/event.js'
+
 const Schema   = mongoose.Schema
 
 const user = {
   uid: String,
   name: String,
   password: String,
-  organization: String
+  organization: String,
+  operation: event
 }
 
 const userSchema = new Schema(user)
@@ -15,4 +18,4 @@ userSchema.statics.retrieve = async function() {
   return users
 }
 
-module.exports = userSchema
+module.exports = mongoose.model('User', userSchema)
