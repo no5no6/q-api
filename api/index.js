@@ -36,7 +36,7 @@ app.get('/test', async (req, res) => {
   const kittens = await Kitten.find();
   console.log(kittens);
 
-  res.send('Hello World!');
+  res.send(kittens);
 })
 
 // app.listen(port, () => {
