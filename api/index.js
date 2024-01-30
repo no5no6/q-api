@@ -4,11 +4,11 @@ const mongoose = require('mongoose');
 
 const port = process.env.PORT | 3001;
 
+let Kitten = null;
 
 main().catch(err => console.log(err));
 
 async function main() {
-  console.log('11111111');
 
   mongoose.connect(process.env.MONGODB_URI);
 
@@ -23,18 +23,19 @@ async function main() {
     console.log(greeting);
   };
 
-  const Kitten = mongoose.model('Kitten', kittySchema);
+  Kitten = mongoose.model('Kitten', kittySchema);
 
-  const fluffy = new Kitten({ name: 'tom' });
+}
+
+app.get('/test', async (req, res) => {
+  const fluffy = new Kitten({ name: 'tom2222' });
 
   await fluffy.save();
   fluffy.speak();
 
   const kittens = await Kitten.find();
   console.log(kittens);
-}
 
-app.get('/test', (req, res) => {
   res.send('Hello World!');
 })
 
