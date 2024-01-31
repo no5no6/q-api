@@ -1,8 +1,14 @@
-import User from '../../models/user/index'
-const { sendSuccess, sendError } = require('../../utils/responseHandler');
 
-app.post('/user', async function(req, res){
-  const data = req.body
+import bcrypt from 'bcryptjs'
+import User from '../../models/user/index'
+
+import { sendSuccess, sendError } from '../../utils/responseHandler'
+import { encryptPassword } from './middleware/encryptPassword'
+
+
+
+app.post('/user', encryptPassword, async (req, res) => {
+  let data = req.body
 
   try {
     const user = await User.add(data)

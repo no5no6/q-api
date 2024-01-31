@@ -18,4 +18,4 @@ QuestionnaireSchema.statics.retrieve = async function() {
   return questionnaires
 }
 
-module.exports = mongoose.model('Questionnaire', QuestionnaireSchema)
+export default mongoose.model('Questionnaire', QuestionnaireSchema)

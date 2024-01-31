@@ -1,5 +1,7 @@
 import express from 'express'
+
 import models from '../models/index.js'
+
 
 const app = express()
 
@@ -25,5 +27,5 @@ require('./user/addUser.js')
 require('./questionnaire/retrieve.js')
 
 
-module.exports = app;
+export default app;
 

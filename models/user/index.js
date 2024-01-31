@@ -36,12 +36,17 @@ userSchema.path('email').validate(function(email) {
 }, '邮箱格式不正确')
 
 
-userSchema.statics.retrieve = async function() {
-  return await this.find()
+userSchema.statics.retrieve = function() {
+  return this.find()
 }
 
-userSchema.statics.add = async function(user) {
-  return await this.create(user)
+userSchema.statics.add = function(user) {
+  return this.create(user)
 }
 
-module.exports = mongoose.model('User', userSchema)
+userSchema.statics.retrieveUserByLoginInfo = function(user) {
+  const query = this.where({name: user.name, password: user.password})
+  return query.findOne()
+}
+
+export default mongoose.model('User', userSchema)

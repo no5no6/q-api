@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-module.exports = async function () {
+export default async function () {
 
   mongoose.connect(process.env.MONGODB_URI)
 
