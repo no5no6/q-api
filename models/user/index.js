@@ -37,8 +37,7 @@ userSchema.path('email').validate(function(email) {
 
 
 userSchema.statics.retrieve = async function() {
-  const users = await this.find()
-  return users
+  return await this.find()
 }
 
 userSchema.statics.add = async function(user) {
