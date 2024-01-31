@@ -16,16 +16,18 @@ models()
   .then(data => {
     console.log('mongodb connect')
   })
-  .catch(err => console.log(err));
+  .catch(err => console.log(err))
+
+// 加载登陆 api
+import './login/index'
 
 // 加载用户 api
-require('./user/retrieve.js')
-require('./user/addUser.js')
-
+import './user/retrieve'
+import './user/addUser'
 
 // 加载问卷 api
-require('./questionnaire/retrieve.js')
+import './questionnaire/retrieve'
 
 
-export default app;
+module.exports = app
 

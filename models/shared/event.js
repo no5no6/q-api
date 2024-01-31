@@ -1,7 +1,7 @@
 import moment from 'moment'
 
 /** 通用时间对象 */
-export default { 
+module.exports = { 
   // 毫秒
   dateNumber: {type: Number, default: Date.now},
   

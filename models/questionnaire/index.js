@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import event from '../shared/event.js'
+import event from '../shared/event'
 
 const Schema   = mongoose.Schema
 
@@ -18,4 +18,4 @@ QuestionnaireSchema.statics.retrieve = async function() {
   return questionnaires
 }
 
-export default mongoose.model('Questionnaire', QuestionnaireSchema)
+module.exports = mongoose.model('Questionnaire', QuestionnaireSchema)

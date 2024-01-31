@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import event from '../shared/event.js'
+import event from '../shared/event'
 
 const Schema   = mongoose.Schema
 
@@ -8,6 +8,7 @@ const userTemplate = {
     type: String,
     minlength: 2,
     required: true,
+    unique: true
   },
   password: {
     type: String,
@@ -15,8 +16,7 @@ const userTemplate = {
   },
   email: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
   organization: String,
   operation: event
@@ -44,9 +44,9 @@ userSchema.statics.add = function(user) {
   return this.create(user)
 }
 
-userSchema.statics.retrieveUserByLoginInfo = function(user) {
-  const query = this.where({name: user.name, password: user.password})
+userSchema.statics.retrieveUserByName = function(name) {
+  const query = this.where({ name })
   return query.findOne()
 }
 
-export default mongoose.model('User', userSchema)
+module.exports = mongoose.model('User', userSchema)

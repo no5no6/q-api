@@ -1,5 +1,12 @@
-// 密码加密中间件
- async function encryptPassword (req, res, next) {
+import bcrypt from 'bcryptjs'
+
+/**
+ * 密码加密
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
+async function encryptPassword (req, res, next) {
   try {
     const { password } = req.body;
     if (password) {
@@ -12,4 +19,4 @@
   }
 }
 
-export { encryptPassword }
+module.exports = { encryptPassword }

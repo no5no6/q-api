@@ -1,7 +1,9 @@
-import User from '../../models/user'
-const { sendSuccess, sendError } = require('../../utils/responseHandler');
+import User from '../../models/user/index'
+import { sendSuccess, sendError } from '../../utils/responseHandler'
+import { authenticateToken } from '../user/middleware/validate'
 
-app.get('/users', async (req, res) => {
+app.get('/users', authenticateToken, async (req, res) => {
+
   try {
     const users = await User.retrieve()
     sendSuccess(res, users)
