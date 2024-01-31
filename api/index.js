@@ -3,6 +3,9 @@ import models from '../models/index.js'
 
 const app = express()
 
+// 解析JSON格式的请求体
+// app.use(express.json())
+
 // express对象赋给全局
 global.app  = app
 
@@ -13,9 +16,12 @@ models()
   })
   .catch(err => console.log(err));
 
-// 加载 api
+// 加载用户 api
 require('./user/retrieve.js')
+require('./user/addUser.js')
 
+
+// 加载问卷 api
 require('./questionnaire/retrieve.js')
 
 

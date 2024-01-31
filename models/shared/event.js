@@ -13,18 +13,4 @@ module.exports = {
 
   // 用户名
   userName: String,
-
-  // 组
-  groupName: String,
-
-  // 部门
-  department: String,
-  
-  departmentId: String,
-
-  // 部门领导
-  leader: String,
-
-  leaderId: String
-
 }
