@@ -37,7 +37,7 @@ const topic = {
 const topicSchema = new Schema(topic, {versionKey: false});
 
 const questionnaireTemplate = {
-  title: {type: String, require: true, unique: true},
+  title: {type: String, require: true, unique: true, minlength: 2},
   status: {type: Boolean, default: true},
   topic: [topicSchema],
   date: String,
@@ -45,6 +45,12 @@ const questionnaireTemplate = {
 }
 
 const questionnaireTemplateSchema = new Schema(questionnaireTemplate, { versionKey: false });
+
+
+questionnaireTemplateSchema.path('topic').validate(function (topics) {
+  return topics.length > 0;
+}, '问卷模板至少包含一个题目');
+
 
 questionnaireTemplateSchema.statics.retrieve = async function() {
   const query = this.where({status: true})
