@@ -1,4 +1,7 @@
+import mongoose from 'mongoose'
+import event from '../shared/event'
 
+const Schema = mongoose.Schema
 
 const options = {
   name: String,
@@ -6,17 +9,19 @@ const options = {
   allowAddReasonStatus: {type: Boolean, default: false} // 某一项选择中是否可以用户选择后添加文字说明
 }
 
-const gradeSchema = {
+const optionsSchema = new Schema(options, {versionKey: false})
+
+
+const grade = {
   step: Number,
   begin: Number,
   end: Number,
   type: String
 }
 
-gradeSchema = new Schema(gradeSchema, {versionKey: false});
+const gradeSchema = new Schema(grade, {versionKey: false})
 
-
-var topicSchema = {
+const topic = {
   options,
   number: Number,
   question: String,
@@ -25,3 +30,20 @@ var topicSchema = {
   grade: gradeSchema,
   must: {type: Boolean, default: true}, // 是否必填项
 }
+
+const topicSchema = new Schema(topic, {versionKey: false});
+
+const questionnaireTemplate = {
+  title: String,
+  status: {type: Boolean, default: true},
+  topic: [topicSchema],
+  date: String,
+  operation: event
+}
+
+const questionnaireTemplateSchema = new Schema(questionnaireTemplate, { versionKey: false });
+
+
+
+
+module.exports = questionnaireTemplateSchema;

@@ -2,10 +2,11 @@ import mongoose from 'mongoose'
 import event from '../shared/event'
 
 const Schema   = mongoose.Schema
+const ObjectId = Schema.ObjectId
 
 const Questionnaire = {
   title: String,
-  // templateId: ObjectId,
+  templateId: ObjectId,
   status: {type: Boolean, default: false},
   date: String,  // 首次提交
   operation: event
