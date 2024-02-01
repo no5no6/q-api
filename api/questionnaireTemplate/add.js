@@ -1,5 +1,5 @@
-import QuestionnaireTemplate from '../../models/questionnaireTemplate/index'
-import { sendSuccess, sendError } from '../../utils/responseHandler'
+const QuestionnaireTemplate = require('../../models/questionnaireTemplate/index')
+const { sendSuccess, sendError} = require('../../utils/responseHandler') 
 
 app.post('/questionnaireTemplate', (req, res) => {
 

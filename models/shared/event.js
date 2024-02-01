@@ -1,4 +1,4 @@
-import moment from 'moment'
+const moment = require('moment')
 
 /** 通用时间对象 */
 module.exports = { 

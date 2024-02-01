@@ -1,5 +1,5 @@
-import mongoose from 'mongoose'
-import event from '../shared/event'
+const mongoose = require('mongoose')
+const event = require('../shared/event')
 
 const Schema   = mongoose.Schema
 const ObjectId = Schema.ObjectId

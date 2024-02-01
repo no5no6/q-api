@@ -1,7 +1,5 @@
-import express from 'express'
-
-import models from '../models/index.js'
-
+const express = require('express')
+const models = require('../models/index.js')
 
 const app = express()
 
@@ -19,17 +17,17 @@ models()
   .catch(err => console.log(err))
 
 // 加载登陆 api
-import './login/index'
+require('./login/index')
 
 // 加载用户 api
-import './user/retrieve'
-import './user/add'
+require('./user/retrieve')
+require('./user/add')
 
 // 加载问卷模版 api
 
 
 // 加载问卷（期） api
-import './questionnaire/retrieve'
+require('./questionnaire/retrieve')
 
 
 module.exports = app

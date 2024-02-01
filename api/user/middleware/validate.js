@@ -1,8 +1,8 @@
-import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
-import User from '../../../models/user/index'
-import { sendError } from '../../../utils/responseHandler'
+const User = require('../../../models/user/index')
+const { sendError } = require('../../../utils/responseHandler')
 
 /**
  * 验证用户名密码非空

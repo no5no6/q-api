@@ -1,7 +1,6 @@
-import jwt from 'jsonwebtoken'
-
-import { sendSuccess } from '../../utils/responseHandler'
-import { validateLoginParamsIsNull, validatePassword } from '../user/middleware/validate'
+const jwt = require('jsonwebtoken')
+const { sendSuccess } = require('../../utils/responseHandler')
+const { validateLoginParamsIsNull, validatePassword } = require('../user/middleware/validate')
 
 app.post('/login', validateLoginParamsIsNull, validatePassword, async (req, res) => {
   const { name } = req.body

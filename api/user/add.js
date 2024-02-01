@@ -1,11 +1,8 @@
-
-import bcrypt from 'bcryptjs'
-
-import User from '../../models/user/index'
-import { sendSuccess, sendError } from '../../utils/responseHandler'
-import { encryptPassword } from './middleware/encryptPassword'
-import { validateEmailExists } from './middleware/validate'
-
+const bcrypt = require('bcryptjs')
+const User = require('../../models/user/index')
+const { sendSuccess, sendError } = require('../../utils/responseHandler')
+const { encryptPassword } = require('./middleware/encryptPassword')
+const { validateEmailExists } = require('./middleware/validate')
 
 app.post('/user',validateEmailExists, encryptPassword, async (req, res) => {
 

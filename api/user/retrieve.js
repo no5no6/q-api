@@ -1,6 +1,6 @@
-import User from '../../models/user/index'
-import { sendSuccess, sendError } from '../../utils/responseHandler'
-import { authenticateToken } from '../user/middleware/validate'
+const User = require('../../models/user/index')
+const { sendSuccess, sendError } = require('../../utils/responseHandler')
+const { authenticateToken } = require('../user/middleware/validate')
 
 app.get('/users', authenticateToken, async (req, res) => {
 
