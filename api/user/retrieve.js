@@ -1,6 +1,6 @@
 const User = require('../../models/user/index')
 const { sendSuccess, sendError } = require('../../utils/responseHandler')
-const { authenticateToken } = require('../user/middleware/validate')
+const { authenticateToken } = require('../../middleware/userValidate')
 
 app.get('/users', authenticateToken, async (req, res) => {
 

@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const { sendSuccess } = require('../../utils/responseHandler')
-const { validateLoginParamsIsNull, validatePassword } = require('../user/middleware/validate')
-console.log(app, 'aaaaaa=a=a=a==a=a=a==a=a=')
+const { validateLoginParamsIsNull, validatePassword } = require('../../middleware/userValidate')
+
 app.post('/login', validateLoginParamsIsNull, validatePassword, async (req, res) => {
   const { name } = req.body
 
