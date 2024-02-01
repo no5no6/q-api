@@ -43,7 +43,7 @@ async function validatePassword(req, res, next) {
   }
 
   // 特殊处理为了登陆成功后返回该对象
-  const {password, operation, __v, ...filterUser} = user.toObject()
+  const {password, operation, ...filterUser} = user.toObject()
   req._myselfCacheData = filterUser
 
   next()

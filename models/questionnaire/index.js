@@ -11,7 +11,7 @@ const Questionnaire = {
   operation: event
 }
 
-const QuestionnaireSchema = new Schema(Questionnaire)
+const QuestionnaireSchema = new Schema(Questionnaire, {versionKey: false})
 
 QuestionnaireSchema.statics.retrieve = async function() {
   const questionnaires = await this.find()

@@ -22,7 +22,7 @@ const userTemplate = {
   operation: event
 }
 
-const userSchema = new Schema(userTemplate)
+const userSchema = new Schema(userTemplate, {versionKey: false})
 
 
 userSchema.pre('save', function(next){

@@ -11,7 +11,7 @@ app.post('/user', encryptPassword, async (req, res) => {
 
   try {
     const user = await User.add(data)
-    const {password, operation, __v, ...filterUser} = user.toObject()
+    const {password, operation, ...filterUser} = user.toObject()
 
     sendSuccess(res, filterUser)
   } catch (error) {
