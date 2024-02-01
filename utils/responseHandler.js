@@ -19,4 +19,4 @@ function sendError(res, statusCode, message) {
   sendResponse(res, statusCode, false, null, message);
 }
 
-export { sendSuccess, sendError };
+module.exports = { sendSuccess, sendError };
