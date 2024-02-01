@@ -3,7 +3,8 @@ import bcrypt from 'bcryptjs'
 
 import User from '../../models/user/index'
 import { sendSuccess, sendError } from '../../utils/responseHandler'
-import { encryptPassword, validateEmailExists } from './middleware/encryptPassword'
+import { encryptPassword } from './middleware/encryptPassword'
+import { validateEmailExists } from './middleware/validate'
 
 
 app.post('/user',validateEmailExists, encryptPassword, async (req, res) => {

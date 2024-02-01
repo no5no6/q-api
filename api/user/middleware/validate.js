@@ -28,10 +28,10 @@ function validateLoginParamsIsNull(req, res, next) {
  * @param {*} next 
  * @returns 
  */
-function validateEmailExists(res, req, next) {
-  const result = User.retrieveUserByEmail(req.body.email)
-
-  if (result) return sendError(res, 400, '邮箱已存在')
+async function validateEmailExists(req, res, next) {
+  const user = await User.retrieveUserByEmail(req.body.email)
+  
+  if (user) return sendError(res, 400, '邮箱已存在')
 
   next()
 }
