@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import event from '../shared/event'
+const ObjectId = mongoose.Types.ObjectId
 
 const Schema = mongoose.Schema
 
@@ -13,7 +14,10 @@ const optionsSchema = new Schema(options, {versionKey: false})
 
 
 const grade = {
-  step: Number,
+  step: {
+    type: Number,
+    default: 1
+  },
   begin: Number,
   end: Number,
   type: String
@@ -26,7 +30,6 @@ const topic = {
   number: Number,
   question: String,
   type: {type: String, default: '单选', enum: ['单选', '多选', '问答', '打分']},
-  // allowAddGrade: {type: Boolean, default: false}, // 是否添加打分
   grade: gradeSchema,
   must: {type: Boolean, default: true}, // 是否必填项
 }
@@ -34,7 +37,7 @@ const topic = {
 const topicSchema = new Schema(topic, {versionKey: false});
 
 const questionnaireTemplate = {
-  title: String,
+  title: {type: String, require: true, unique: true},
   status: {type: Boolean, default: true},
   topic: [topicSchema],
   date: String,
@@ -43,7 +46,23 @@ const questionnaireTemplate = {
 
 const questionnaireTemplateSchema = new Schema(questionnaireTemplate, { versionKey: false });
 
+questionnaireTemplateSchema.statics.retrieve = async function() {
+  const query = this.where({status: true})
+  return await query.find()
+}
 
+questionnaireTemplateSchema.statics.retrieveById = async function(id) {
+  const query = this.where({_id: new ObjectId(id)})
+  return await query.find()
+}
 
+questionnaireTemplateSchema.statics.retrieveByTitle = async function(title) {
+  const query = this.where({title})
+  return await query.find()
+}
+
+questionnaireTemplateSchema.static.add = async function(template) {
+  return questionnaireTemplateSchema.create(template)
+}
 
 module.exports = questionnaireTemplateSchema;

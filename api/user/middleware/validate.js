@@ -22,6 +22,21 @@ function validateLoginParamsIsNull(req, res, next) {
 }
 
 /**
+ * 验证邮箱是否存在
+ * @param {*} res 
+ * @param {*} req 
+ * @param {*} next 
+ * @returns 
+ */
+function validateEmailExists(res, req, next) {
+  const result = User.retrieveUserByEmail(req.body.email)
+
+  if (result) return sendError(res, 400, '邮箱已存在')
+
+  next()
+}
+
+/**
  * 验证用户密码是否正确
  * @param {*} req 
  * @param {*} res 
@@ -32,7 +47,7 @@ async function validatePassword(req, res, next) {
   const user = await User.retrieveUserByName(req.body.name)
 
   if (!user) {
-    sendError(res, 400, '用户不存在')
+    return sendError(res, 400, '用户不存在')
   }
 
   // 验证密码
@@ -76,4 +91,4 @@ function authenticateToken(req, res, next) {
   });
 }
 
-module.exports =  { validateLoginParamsIsNull, validatePassword, authenticateToken }
+module.exports =  { validateLoginParamsIsNull, validatePassword, authenticateToken, validateEmailExists}

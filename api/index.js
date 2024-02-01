@@ -23,9 +23,12 @@ import './login/index'
 
 // 加载用户 api
 import './user/retrieve'
-import './user/addUser'
+import './user/add'
 
-// 加载问卷 api
+// 加载问卷模版 api
+
+
+// 加载问卷（期） api
 import './questionnaire/retrieve'
 
 

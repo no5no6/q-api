@@ -49,4 +49,9 @@ userSchema.statics.retrieveUserByName = function(name) {
   return query.findOne()
 }
 
+userSchema.statics.retrieveUserByEmail = function(email) {
+  const query = this.where({ email })
+  return query.findOne()
+}
+
 module.exports = mongoose.model('User', userSchema)
