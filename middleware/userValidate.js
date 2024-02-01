@@ -29,6 +29,7 @@ function validateLoginParamsIsNull(req, res, next) {
  * @returns 
  */
 async function validateEmailExists(req, res, next) {
+  console.log(req.body, 'boboboobobobo')
   const user = await User.retrieveUserByEmail(req.body.email)
   
   if (user) return sendError(res, 400, '邮箱已存在')
