@@ -5,43 +5,71 @@ const ObjectId = mongoose.Types.ObjectId
 
 const Schema = mongoose.Schema
 
+/**
+ * 选项
+ * content 内容
+ * allowAddReasonStatus 是否可以在用户选择后添加文字说明
+ */
 const options = {
-  name: String,
-  content: String,
-  allowAddReasonStatus: {type: Boolean, default: false} // 某一项选择中是否可以用户选择后添加文字说明
+  content: {
+    type: String,
+    required: [true, '选择项名称不能为空']
+  },
+  allowAddReasonStatus: {type: Boolean, default: false}
 }
+
 
 const optionsSchema = new Schema(options, {versionKey: false})
 
-
+/**
+ * 打分
+ * max 最多几颗星
+ * text 不同颗数星星对应文本
+ */
 const grade = {
-  step: {
-    type: Number,
-    default: 1
+  // step: {
+  //   type: Number,
+  //   default: 1
+  // },
+  max: {
+    type:Number,
+    default: 10
   },
-  begin: Number,
-  end: Number,
-  type: String
+  text: [String]
 }
 
 const gradeSchema = new Schema(grade, {versionKey: false})
 
+/**
+ * 题目
+ * option 选项
+ * number 题号
+ * question 题目
+ * type 题目类型
+ * grade 打分设置
+ * must 是否必填项
+ */
 const topic = {
-  options,
-  number: Number,
+  options: [optionsSchema],
+  // number: Number,
   question: String,
   type: {type: String, default: '单选', enum: ['单选', '多选', '问答', '打分']},
   grade: gradeSchema,
-  must: {type: Boolean, default: true}, // 是否必填项
+  must: {type: Boolean, default: true}
 }
 
 const topicSchema = new Schema(topic, {versionKey: false});
 
+/**
+ * title 问卷名称
+ * status 问卷状态
+ * operation 操作员
+ */
 const questionnaireTemplate = {
-  title: {type: String, require: true, unique: true, minlength: 2},
+  title: {type: String, required: [true, '标题不能为空'], unique: true, minlength: 2},
   status: {type: Boolean, default: true},
   topic: [topicSchema],
-  date: String,
+  // date: String,
   operation: event
 }
 
@@ -68,8 +96,8 @@ questionnaireTemplateSchema.statics.retrieveByTitle = async function(title) {
   return await query.find()
 }
 
-questionnaireTemplateSchema.static.add = async function(template) {
-  return questionnaireTemplateSchema.create(template)
+questionnaireTemplateSchema.statics.add = async function(template) {
+  return this.create(template)
 }
 
 module.exports = questionnaireTemplateSchema;
