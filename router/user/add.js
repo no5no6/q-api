@@ -1,4 +1,3 @@
-const bcrypt = require('bcryptjs')
 const User = require('../../models/user/index')
 const { sendSuccess, sendError } = require('../../utils/responseHandler')
 const { encryptPassword } = require('../../middleware/encryptPassword')

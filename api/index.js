@@ -4,7 +4,6 @@ const models = require('../models/index')
 const app = express()
 
 // 解析JSON格式的请求体
-
 app.use(express.json())
 // app.use(express.json())
 
@@ -22,8 +21,7 @@ models()
 require('./login/index')
 
 // 加载用户 api
-require('./user/retrieve')
-require('./user/add')
+require('./user/index')
 
 // 加载问卷模版 api
 
