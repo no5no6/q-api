@@ -23,10 +23,11 @@ require('./login/index')
 require('./user/index')
 
 // 加载问卷模版 api
-
+require('./questionnaireTemplate/index')
 
 // 加载问卷（期） api
-require('./questionnaire/retrieve')
+require('./questionnaire/index')
+
 
 
 module.exports = app
