@@ -1,4 +1,4 @@
-const moment = require('moment')
+const dayjs = require('dayjs')
 
 /** 通用时间对象 */
 module.exports = { 
@@ -6,7 +6,7 @@ module.exports = {
   dateNumber: {type: Number, default: Date.now},
   
   // 格式 YYYY-MM-DD
-  dateString: {type: String, default: (function(){return moment().format('YYYY-MM-DD');})},
+  dateString: {type: String, default: (() => dayjs().format('YYYY-MM-DD'))},
 
   // 用户id
   userId: String,
