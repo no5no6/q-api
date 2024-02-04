@@ -88,16 +88,28 @@ questionnaireTemplateSchema.statics.retrieve = async function() {
 
 questionnaireTemplateSchema.statics.retrieveById = async function(id) {
   const query = this.where({_id: new ObjectId(id)})
-  return await query.find()
+  return await query.findOne()
 }
 
 questionnaireTemplateSchema.statics.retrieveByTitle = async function(title) {
   const query = this.where({title})
-  return await query.find()
+  return await query.findOne()
 }
 
 questionnaireTemplateSchema.statics.add = async function(template) {
-  return this.create(template)
+  return await this.create(template)
+}
+
+questionnaireTemplateSchema.static.updateById = async function(id, questionnaireTemplate) {
+  return await this.findByIdAndUpdate(id, 
+    {
+      $set: questionnaireTemplate
+    }, 
+    {
+      new: true, // 返回更新后的文档
+      runValidators: true, // 启用验证
+    }
+  )
 }
 
 module.exports = questionnaireTemplateSchema;
