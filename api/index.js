@@ -4,7 +4,7 @@ const models = require('../models/index')
 const app = express()
 
 // 解析JSON格式的请求体
-app.use(express.json())
+// app.use(express.json())
 
 // express对象赋给全局
 global.app  = app

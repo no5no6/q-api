@@ -73,7 +73,7 @@ const questionnaireTemplate = {
   operation: event
 }
 
-const questionnaireTemplateSchema = new Schema(questionnaireTemplate, { versionKey: false });
+const questionnaireTemplateSchema = new Schema(questionnaireTemplate, { versionKey: false })
 
 
 questionnaireTemplateSchema.path('topic').validate(function (topics) {
@@ -112,4 +112,4 @@ questionnaireTemplateSchema.static.updateById = async function(id, questionnaire
   )
 }
 
-module.exports = questionnaireTemplateSchema;
+module.exports = mongoose.model('QuestionnaireTemplate', questionnaireTemplateSchema)

@@ -1,6 +1,5 @@
 require('../../router/questionnaireTemplate/add')
 require('../../router/questionnaireTemplate/retrieve')
 require('../../router/questionnaireTemplate/retrieveById')
-require('../../router/questionnaireTemplate/retrieveByTitle')
 require('../../router/questionnaireTemplate/update')
 require('../../router/questionnaireTemplate/remove')
