@@ -64,12 +64,15 @@ const topicSchema = new Schema(topic, {versionKey: false});
  * title 问卷名称
  * status 问卷状态
  * operation 操作员
+ * topic 问卷题目相关
+ * createTime 创建时间
  */
 const questionnaireTemplate = {
   title: {type: String, required: [true, '标题不能为空'], unique: true, minlength: 2},
   status: {type: Boolean, default: true},
   topic: [topicSchema],
   // date: String,
+  createTime: {type: Number, default: Date.now, immutable: true},
   operation: event
 }
 

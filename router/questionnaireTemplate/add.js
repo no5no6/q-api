@@ -3,7 +3,7 @@ const { sendSuccess, sendError} = require('../../utils/responseHandler')
 const { authenticateToken } = require('../../middleware/userValidate')
 
 app.post('/questionnaireTemplate', async (req, res) => {
-  console.log(req.body, 'aaaaaaa')
+  
   try {
     const questionnaireTemplate = await QuestionnaireTemplate.add(req.body)
     sendSuccess(res, questionnaireTemplate)
