@@ -81,27 +81,24 @@ questionnaireTemplateSchema.path('topic').validate(function (topics) {
 }, '问卷模板至少包含一个题目');
 
 
-questionnaireTemplateSchema.statics.retrieve = async function() {
-  const query = this.where({status: true})
-  return await query.find()
+questionnaireTemplateSchema.statics.retrieve = function() {
+  return this.find({ status: true })
 }
 
-questionnaireTemplateSchema.statics.retrieveById = async function(id) {
-  const query = this.where({_id: new ObjectId(id)})
-  return await query.findOne()
+questionnaireTemplateSchema.statics.retrieveById = function(id) {
+  return this.findOne({ _id: new ObjectId(id) })
 }
 
-questionnaireTemplateSchema.statics.retrieveByTitle = async function(title) {
-  const query = this.where({title})
-  return await query.findOne()
+questionnaireTemplateSchema.statics.retrieveByTitle = function(title) {
+  return this.findOne({title})
 }
 
-questionnaireTemplateSchema.statics.add = async function(template) {
-  return await this.create(template)
+questionnaireTemplateSchema.statics.add = function(template) {
+  return this.create(template)
 }
 
-questionnaireTemplateSchema.static.updateById = async function(id, questionnaireTemplate) {
-  return await this.findByIdAndUpdate(id, 
+questionnaireTemplateSchema.statics.updateById = function(id, questionnaireTemplate) {
+  return this.findByIdAndUpdate(id, 
     {
       $set: questionnaireTemplate
     }, 
