@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 const event = require('../shared/event')
 
 const ObjectId = mongoose.Types.ObjectId
-
 const Schema = mongoose.Schema
 
 /**

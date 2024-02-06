@@ -30,7 +30,7 @@ userSchema.pre('save', function(next){
 })
 
 
-userSchema.path('email').validate(function(email) {
+userSchema.path('email').validate(email => {
   const emailRegex = /[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/igm
   return emailRegex.test(email)
 }, '邮箱格式不正确')

@@ -2,7 +2,8 @@ const mongoose = require('mongoose')
 const event = require('../shared/event')
 
 const Schema   = mongoose.Schema
-const ObjectId = Schema.ObjectId
+const ObjectIdType = Schema.ObjectId
+const ObjectId = mongoose.Types.ObjectId
 
 
 /**
@@ -13,14 +14,21 @@ const ObjectId = Schema.ObjectId
  * operation 操作员
  */
 const Questionnaire = {
-  title: String,
-  templateId: ObjectId,
+  title: {type: String, required: [true, '标题不能为空'], unique: true, minlength: 2},
+  templateId: ObjectIdType,
   status: {type: Boolean, default: false},
   createTime: {type: Number, default: Date.now, immutable: true},
   operation: event
 }
 
 const QuestionnaireSchema = new Schema(Questionnaire, {versionKey: false})
+
+
+// findByIdAndUpdate 方法会触发此中间件，限制每个模版下只能打开一个当期问卷
+// QuestionnaireSchema.pre('findOneAndUpdate', async (next) => {
+//   next()
+// })
+
 
 QuestionnaireSchema.statics.retrieve = function() {
   return questionnaires = this.find()
@@ -30,12 +38,16 @@ QuestionnaireSchema.statics.retrieveById = function(id) {
   return questionnaire = this.findOne({_id: new ObjectId(id)})
 }
 
-QuestionnaireSchema.statics.retrieveByTemplateId = function(templateId) {
-  return questionnaire = this.find({templateId: new ObjectId(templateId)})
+QuestionnaireSchema.statics.retrieveOpenByTemplateId = function(templateId) {
+  return questionnaire = this.find({templateId: new ObjectId(templateId), status: true})
 }
 
 QuestionnaireSchema.statics.retrieveByTittle = function(title) {
   return questionnaire = this.findOne({title})
+}
+
+QuestionnaireSchema.statics.add = function(questionnaire) {
+  return this.create(questionnaire)
 }
 
 QuestionnaireSchema.statics.updateById = function(id, questionnaire) {
