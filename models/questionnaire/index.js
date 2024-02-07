@@ -14,10 +14,15 @@ const ObjectId = mongoose.Types.ObjectId
  * operation 操作员
  */
 const Questionnaire = {
-  title: {type: String, required: [true, '标题不能为空'], unique: true, minlength: 2},
+  title: {
+    type: String, 
+    unique: true,
+    required: [true, '标题不能为空'], 
+    minlength: 2
+  },
   templateId: ObjectIdType,
   status: {type: Boolean, default: false},
-  createTime: {type: Number, default: Date.now, immutable: true},
+  createTime: {type: Number, default: Date.now(), immutable: true},
   operation: event
 }
 
@@ -28,6 +33,12 @@ const QuestionnaireSchema = new Schema(Questionnaire, {versionKey: false})
 // QuestionnaireSchema.pre('findOneAndUpdate', async (next) => {
 //   next()
 // })
+QuestionnaireSchema.pre('save', function(next) {
+  // 只在新建时候执行
+  if (this.new) this.createTime = Date.now()
+
+  next()
+})
 
 
 QuestionnaireSchema.statics.retrieve = function() {

@@ -3,8 +3,9 @@ const models = require('../models/index')
 
 const app = express()
 
-// 解析JSON格式的请求体
-app.use(express.json())
+// 解析JSON格式的请求体 (本地 vercel dev 不需要用这句代码解析 body ，线上需要)
+if(process.env.VERCEL_ENV !== 'development') app.use(express.json())
+
 
 // express对象赋给全局
 global.app  = app

@@ -67,16 +67,27 @@ const topicSchema = new Schema(topic, {versionKey: false});
  * createTime 创建时间
  */
 const questionnaireTemplate = {
-  title: {type: String, required: [true, '标题不能为空'], unique: true, minlength: 2},
+  title: {
+    type: String, 
+    unique: true,
+    required: [true, '标题不能为空'], 
+    minlength: 2
+  },
   status: {type: Boolean, default: true},
   topic: [topicSchema],
   // date: String,
-  createTime: {type: Number, default: Date.now, immutable: true},
+  createTime: {type: Number, default: Date.now(), immutable: true},
   operation: event
 }
 
 const questionnaireTemplateSchema = new Schema(questionnaireTemplate, { versionKey: false })
 
+questionnaireTemplateSchema.pre('save', function(next) {
+  // 只在新建时候执行
+  if (this.new) this.createTime = Date.now()
+
+  next()
+})
 
 questionnaireTemplateSchema.path('topic').validate(function (topics) {
   return topics.length > 0;
