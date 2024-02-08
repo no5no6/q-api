@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 module.exports = async function () {
 
-  mongoose.connect(process.env.MONGODB_URI)
+  mongoose.connect(process.env.MONGODB_URI, { autoIndex: false })
 
   // const User = mongoose.model('User', userSchema)
   // const Questionnaire = mongoose.model('Questionnaire', questionnaireEachSchema)
