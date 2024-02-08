@@ -8,7 +8,6 @@ const userTemplate = {
     type: String,
     minlength: 2,
     required: true,
-    unique: true
   },
   password: {
     type: String,

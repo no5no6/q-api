@@ -69,7 +69,6 @@ const topicSchema = new Schema(topic, {versionKey: false});
 const questionnaireTemplate = {
   title: {
     type: String, 
-    unique: true,
     required: [true, '标题不能为空'], 
     minlength: 2
   },

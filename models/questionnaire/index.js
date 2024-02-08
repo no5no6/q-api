@@ -16,7 +16,6 @@ const ObjectId = mongoose.Types.ObjectId
 const Questionnaire = {
   title: {
     type: String, 
-    unique: true,
     required: [true, '标题不能为空'], 
     minlength: 2
   },
