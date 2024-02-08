@@ -1,7 +1,8 @@
 const Questionnaire = require('../../models/questionnaire/index')
 const { sendSuccess, sendError} = require('../../utils/responseHandler')
+const { validateTitleExists } = require('../../middleware/questionnaireValidate')
 
-app.post('/questionnaire', async (req, res) => {
+app.post('/questionnaire', validateTitleExists, async (req, res) => {
 
   try {
     console.log(req.body, 'body')

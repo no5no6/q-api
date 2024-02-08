@@ -29,12 +29,38 @@ function validateLoginParamsIsNull(req, res, next) {
  * @returns 
  */
 async function validateEmailExists(req, res, next) {
-  console.log(req.body, 'boboboobobobo')
-  const user = await User.retrieveUserByEmail(req.body.email)
-  
-  if (user) return sendError(res, 400, '邮箱已存在')
 
-  next()
+  try {
+    const user = await User.retrieveUserByEmail(req.body.email)
+  
+    if (user) return sendError(res, 400, '邮箱已存在')
+  
+    next()
+  } catch (error) {
+    return sendError(res, 500, error.message)
+  }
+
+}
+
+/**
+ * 验证用户名是否存在
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ * @returns 
+ */
+async function validateNameExists(req, res, next) {
+  console.log('xxxxxxxxxxxxx')
+  try {
+    const user = await User.retrieveUserByName(req.body.name)
+    console.log(user, 'uuuuuuuuu')
+    if (user) return sendError(res, 400, '用户名已存在')
+  
+    next()
+  } catch (error) {
+    return sendError(res, 500, error.message)
+  }
+
 }
 
 /**
@@ -45,24 +71,31 @@ async function validateEmailExists(req, res, next) {
  * @returns 
  */
 async function validatePassword(req, res, next) {
-  const user = await User.retrieveUserByName(req.body.name)
 
-  if (!user) {
-    return sendError(res, 400, '用户不存在')
+  try {
+    const user = await User.retrieveUserByName(req.body.name)
+
+    if (!user) {
+      return sendError(res, 400, '用户不存在')
+    }
+  
+    // 验证密码
+    const isPasswordValid = await bcrypt.compare(req.body.password, user.password);
+  
+    if (!isPasswordValid) {
+      return sendError(res, 400, '用户名密码错误')
+    }
+  
+    // 特殊处理为了登陆成功后返回该对象
+    const {password, operation, ...filterUser} = user.toObject()
+    req._myselfCacheData = filterUser
+  
+    next()
+    
+  } catch (error) {
+    return sendError(res, 500, error.message)
   }
 
-  // 验证密码
-  const isPasswordValid = await bcrypt.compare(req.body.password, user.password);
-
-  if (!isPasswordValid) {
-    return sendError(res, 400, '用户名密码错误')
-  }
-
-  // 特殊处理为了登陆成功后返回该对象
-  const {password, operation, ...filterUser} = user.toObject()
-  req._myselfCacheData = filterUser
-
-  next()
 }
 
 /**
@@ -92,4 +125,4 @@ function authenticateToken(req, res, next) {
   });
 }
 
-module.exports =  { validateLoginParamsIsNull, validatePassword, authenticateToken, validateEmailExists}
+module.exports =  { validateLoginParamsIsNull, validatePassword, authenticateToken, validateEmailExists, validateNameExists}

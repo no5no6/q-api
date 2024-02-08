@@ -41,19 +41,19 @@ QuestionnaireSchema.pre('save', function(next) {
 
 
 QuestionnaireSchema.statics.retrieve = function() {
-  return questionnaires = this.find()
+  return this.find()
 }
 
 QuestionnaireSchema.statics.retrieveById = function(id) {
-  return questionnaire = this.findOne({_id: new ObjectId(id)})
+  return this.findOne({_id: new ObjectId(id)})
 }
 
 QuestionnaireSchema.statics.retrieveOpenByTemplateId = function(templateId) {
-  return questionnaire = this.find({templateId: new ObjectId(templateId), status: true})
+  return this.find({templateId: new ObjectId(templateId), status: true})
 }
 
-QuestionnaireSchema.statics.retrieveByTittle = function(title) {
-  return questionnaire = this.findOne({title})
+QuestionnaireSchema.statics.retrieveByTitle = function(title) {
+  return this.findOne({title})
 }
 
 QuestionnaireSchema.statics.add = function(questionnaire) {
