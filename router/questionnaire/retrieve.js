@@ -9,6 +9,4 @@ app.get('/questionnaires', async (req, res) => {
   } catch (error) {
     sendError(res, 500, error.message)
   }
-
-  res.send(questionnaires)
 })

@@ -11,6 +11,7 @@ async function validateOpenTemplateStatus(req, res, next) {
   const status = req.body.status
 
   try {
+    console.log(req.params.id, 'dkdiidididi')
     const questionnaire = await Questionnaire.retrieveById(req.params.id)
 
     if(questionnaire) return sendError(res, 404, '未找到该问卷。')
