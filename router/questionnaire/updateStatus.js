@@ -5,13 +5,13 @@ const { validateOpenTemplateStatus }= require('../../middleware/questionnaireVal
 app.patch('/questionnaire/:id/status', validateOpenTemplateStatus, async (req, res) => {
   const status = req.body.status
   // 中间件中缓存的值
-  const questionnaire = req._myselfCacheData
+  let questionnaire = req._myselfCacheData
 
   try {
     questionnaire.status = status
-    const questionnaire = await Questionnaire.add(questionnaire)
+    const new_questionnaire = await Questionnaire.add(questionnaire)
 
-    sendSuccess(res, questionnaire)
+    sendSuccess(res, new_questionnaire)
   } catch (error) {
     sendError(res, 500, error.message)
   }

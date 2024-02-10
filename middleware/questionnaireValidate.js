@@ -11,14 +11,13 @@ async function validateOpenTemplateStatus(req, res, next) {
   const status = req.body.status
 
   try {
-    console.log(req.params.id, 'dkdiidididi')
     const questionnaire = await Questionnaire.retrieveById(req.params.id)
-
-    if(questionnaire) return sendError(res, 404, '未找到该问卷。')
+    
+    if(!questionnaire) return sendError(res, 404, '未找到该问卷。')
 
     if(status) {
       const questionnaireByTemplate = await Questionnaire.retrieveOpenByTemplateId(questionnaire.templateId)
-
+      console.log(questionnaireByTemplate, 'questionnaireByTemplate')
       if(questionnaireByTemplate) return sendError(res, 403, '开启新问卷前，请关闭同一模板下的其他问卷。')
     }
 

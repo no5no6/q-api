@@ -50,7 +50,7 @@ QuestionnaireSchema.statics.retrieveById = function(id) {
 }
 
 QuestionnaireSchema.statics.retrieveOpenByTemplateId = function(templateId) {
-  return this.find({templateId: new ObjectId(templateId), status: true})
+  return this.findOne({templateId: new ObjectId(templateId), status: true})
 }
 
 QuestionnaireSchema.statics.retrieveByTitle = function(title) {
