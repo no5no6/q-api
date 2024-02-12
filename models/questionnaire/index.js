@@ -45,7 +45,6 @@ QuestionnaireSchema.statics.retrieve = function() {
 }
 
 QuestionnaireSchema.statics.retrieveById = function(id) {
-  console.log(new ObjectId(id), 'ddddddd')
   return this.findOne({_id: new ObjectId(id)})
 }
 
