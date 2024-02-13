@@ -21,6 +21,7 @@ const gradeSchema = new Schema(grade, {versionKey: false})
 
 /**
  * topicId 对应题目 _id
+ * number 题号
  * question 题目
  * selectContent 单选选择内容
  * selectMultipleContent 多选选择内容
@@ -33,15 +34,15 @@ const gradeSchema = new Schema(grade, {versionKey: false})
  * must 是否必填项
  */
 const options = {
-  topicId: ObjectIdType, // 问题id
-  // number: Number, // 题号
-  question: String,    // 问题文字描述
+  topicId: ObjectIdType,
+  number: Number,
+  question: String,
   selectContent: String,
   selectMultipleContent: [String],
   selectId: ObjectIdType,
   selectMultipleId: [ObjectIdType],
   type: {type: String, default: '单选', enum: ['单选', '多选', '问答', '评分']},
-  additional: String, // 附加文字补充
+  additional: String,
   grade: gradeSchema,
   option: Array,
   must: {type: Boolean, default: true},
@@ -80,3 +81,47 @@ answerSchema.statics.retrieveById = function(id) {
   return this.findOne({_id: new ObjectId(id)})
 }
 
+answerSchema.statics.retrieveByUserName = function(questionnaireId, userName) {
+  return this.find({userName, questionnaireId: new ObjectId(questionnaireId)})
+}
+
+answerSchema.statics.retrieveByQuestionnaireIdGroup = function(questionnaireId) {
+  return this.aggregate([
+    {
+      $match: {
+        'questionnaireId': new ObjectId(param.questionnaireId)
+      }
+    },
+    {
+      $unwind: '$answer'
+    },
+    {
+      $project: {
+        _id: 0,
+        number: 1,
+        userName: 1,
+        answer: 1
+      }
+    },
+    {
+      $group: {
+        _id: '$answer.question',
+        result: {
+          '$push': {
+            number: '$answer.number',
+            userName: '$userName',
+            selectContent: '$answer.selectContent',
+            additional: '$answer.additional',
+            option: '$answer.option',
+            type: '$answer.type',
+            selectMultipleContent: '$answer.selectMultipleContent',
+            grade: '$answer.grade'
+          }
+        }
+      }
+    },
+    {
+      $sort: {'result.number': 1}
+    }
+  ])
+}
