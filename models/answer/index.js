@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const event = require('../shared/event')
 
 const Schema   = mongoose.Schema
+const ObjectIdType = Schema.ObjectId
 const ObjectId = mongoose.Types.ObjectId
 
 /**
@@ -32,13 +33,13 @@ const gradeSchema = new Schema(grade, {versionKey: false})
  * must 是否必填项
  */
 const options = {
-  topicId: ObjectId, // 问题id
+  topicId: ObjectIdType, // 问题id
   // number: Number, // 题号
   question: String,    // 问题文字描述
   selectContent: String,
   selectMultipleContent: [String],
-  selectId: ObjectId,
-  selectMultipleId: [ObjectId],
+  selectId: ObjectIdType,
+  selectMultipleId: [ObjectIdType],
   type: {type: String, default: '单选', enum: ['单选', '多选', '问答', '评分']},
   additional: String, // 附加文字补充
   grade: gradeSchema,
@@ -59,8 +60,8 @@ const optionsSchema = new Schema(options, {versionKey: false})
  * operation 操作员
  */
 const answer = {
-  templateId: ObjectId,
-  questionnaireId: ObjectId,
+  templateId: ObjectIdType,
+  questionnaireId: ObjectIdType,
   questionnaireTitle: String,
   userName: String,
   status: {type: Boolean, default: true},
@@ -70,3 +71,12 @@ const answer = {
 }
 
 const answerSchema = new Schema(answer, {versionKey: false})
+
+answerSchema.statics.retrieve = function() {
+  return this.find()
+}
+
+answerSchema.statics.retrieveById = function(id) {
+  return this.findOne({_id: new ObjectId(id)})
+}
+
