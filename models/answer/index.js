@@ -81,11 +81,11 @@ answerSchema.statics.retrieveById = function(id) {
   return this.findOne({_id: new ObjectId(id)})
 }
 
-answerSchema.statics.retrieveByUserName = function(questionnaireId, userName) {
+answerSchema.statics.retrieveFinishedByUserName = function(questionnaireId, userName) {
   return this.find({userName, questionnaireId: new ObjectId(questionnaireId)})
 }
 
-answerSchema.statics.retrieveByQuestionnaireIdGroup = function(questionnaireId) {
+answerSchema.statics.retrieveResultsByQuestionnaireIdGroup = function(questionnaireId) {
   return this.aggregate([
     {
       $match: {
