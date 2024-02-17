@@ -66,7 +66,7 @@ const answer = {
   questionnaireTitle: String,
   userName: String,
   status: {type: Boolean, default: true},
-  options: [answerSchema],
+  options: [optionsSchema],
   createTime: Number,
   operation: event,
 }
