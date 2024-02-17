@@ -23,10 +23,8 @@ const gradeSchema = new Schema(grade, {versionKey: false})
  * topicId 对应题目 _id
  * number 题号
  * question 题目
- * selectContent 单选选择内容
- * selectMultipleContent 多选选择内容
- * selectId 单选选项 _id
- * selectMultipleId 多选选项 _id
+ * selectContent 选择内容(单选、多选)
+ * selectId 选项 _id（单选、多选）
  * type 题目类型
  * additional 附加文字补充
  * grade 打分设置
@@ -37,10 +35,8 @@ const options = {
   topicId: ObjectIdType,
   number: Number,
   question: String,
-  selectContent: String,
-  selectMultipleContent: [String],
-  selectId: ObjectIdType,
-  selectMultipleId: [ObjectIdType],
+  selectContent: [String],
+  selectId: [ObjectIdType],
   type: {type: String, default: '单选', enum: ['单选', '多选', '问答', '评分']},
   additional: String,
   grade: gradeSchema,
