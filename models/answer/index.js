@@ -43,7 +43,7 @@ const topicAnswerSchema = new Schema(topicAnswer, {versionKey: false})
  * questionnaireId 对应当期问卷 _id
  * questionnaireTitle 当期问卷标题
  * userName 回答者姓名
- * status
+ * status 答卷状态
  * options 答题数组
  * createTime 首次提交
  * operation 操作员
@@ -98,11 +98,11 @@ answerSchema.statics.retrieveResultsByQuestionnaireIdGroup = function(questionna
           '$push': {
             number: '$answer.number',
             userName: '$userName',
-            selectContent: '$answer.selectContent',
+            selectId: '$answer.selectId',
             additional: '$answer.additional',
-            option: '$answer.option',
+            options: '$answer.options',
+            text: '$answer.text',
             type: '$answer.type',
-            selectMultipleContent: '$answer.selectMultipleContent',
             grade: '$answer.grade'
           }
         }
