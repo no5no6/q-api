@@ -29,8 +29,12 @@ require('./questionnaireTemplate/index')
 // 加载问卷（期） api
 require('./questionnaire/index')
 
+// 加载答题 api
+require('./answer/index')
+
 // 加载统计 api
 require('./statistics/index')
+
 
 
 

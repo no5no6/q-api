@@ -61,6 +61,11 @@ const answer = {
 
 const answerSchema = new Schema(answer, {versionKey: false})
 
+
+answerSchema.statics.add = function(answer) {
+  return this.create(answer)
+}
+
 answerSchema.statics.retrieve = function() {
   return this.find()
 }
