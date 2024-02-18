@@ -118,3 +118,5 @@ answerSchema.statics.retrieveResultsByQuestionnaireIdGroup = function(questionna
     }
   ])
 }
+
+module.exports = mongoose.model('Answer', answerSchema)
