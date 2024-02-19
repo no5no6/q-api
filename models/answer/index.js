@@ -54,7 +54,7 @@ const answer = {
   questionnaireTitle: String,
   userName: String,
   status: {type: Boolean, default: true},
-  options: [topicAnswerSchema],
+  responding: [topicAnswerSchema],
   createTime: Number,
   operation: event,
 }
@@ -82,33 +82,33 @@ answerSchema.statics.retrieveResultsByQuestionnaireIdGroup = function(questionna
   return this.aggregate([
     {
       $match: {
-        'questionnaireId': new ObjectId(param.questionnaireId)
+        'questionnaireId': new ObjectId(questionnaireId)
       }
     },
     {
-      $unwind: '$answer'
+      $unwind: '$responding'
     },
     {
       $project: {
         _id: 0,
         number: 1,
         userName: 1,
-        answer: 1
+        responding: 1
       }
     },
     {
       $group: {
-        _id: '$answer.question',
+        _id: '$responding.question',
         result: {
           '$push': {
-            number: '$answer.number',
+            number: '$responding.number',
             userName: '$userName',
-            selectId: '$answer.selectId',
-            additional: '$answer.additional',
-            options: '$answer.options',
-            text: '$answer.text',
-            type: '$answer.type',
-            grade: '$answer.grade'
+            selectId: '$responding.selectId',
+            additional: '$responding.additional',
+            options: '$responding.options',
+            text: '$responding.text',
+            type: '$responding.type',
+            grade: '$responding.grade'
           }
         }
       }
