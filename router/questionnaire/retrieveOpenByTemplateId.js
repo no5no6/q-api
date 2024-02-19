@@ -1,7 +1,7 @@
 const Questionnaire = require('../../models/questionnaire/index')
 const { sendSuccess, sendError} = require('../../utils/responseHandler')
 
-app.get('/questionnaire/:templateId/open', async (req, res) => {
+app.get('/questionnaires/:templateId/open', async (req, res) => {
   
   try {
     const questionnaire = await Questionnaire.retrieveOpenByTemplateId(req.params.templateId)

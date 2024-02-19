@@ -1,7 +1,7 @@
 const Questionnaire = require('../../models/questionnaire/index')
 const { sendSuccess, sendError} = require('../../utils/responseHandler')
 
-app.get('/questionnaire/:id', async (req, res) => {
+app.get('/questionnaires/:id', async (req, res) => {
   try {
     const questionnaire = await Questionnaire.retrieveById(req.params.id)
     sendSuccess(res, questionnaire)

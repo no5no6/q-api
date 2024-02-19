@@ -2,7 +2,7 @@ const Questionnaire = require('../../models/questionnaire/index')
 const { sendSuccess, sendError} = require('../../utils/responseHandler')
 const { validateOpenTemplateStatus }= require('../../middleware/questionnaireValidate')
 
-app.patch('/questionnaire/:id/status', validateOpenTemplateStatus, async (req, res) => {
+app.patch('/questionnaires/:id/status', validateOpenTemplateStatus, async (req, res) => {
   const status = req.body.status
   // 中间件中缓存的值
   let questionnaire = req._myselfCacheData

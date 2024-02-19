@@ -1,7 +1,7 @@
 const Answer = require('../../models/answer')
 const { sendSuccess, sendError } = require('../../utils/responseHandler')
 
-app.get('/answer/:id/finished/:username', async (req, res) => {
+app.get('/answers/:id/finished/:username', async (req, res) => {
   const { id, username:userName } = req.params
 
   try {
