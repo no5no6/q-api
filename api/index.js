@@ -35,8 +35,8 @@ require('./answer/index')
 // 加载统计 api
 require('./statistics/index')
 
-
-
+// 加载提供前端测试接口
+require('./test/index')
 
 module.exports = app
 
