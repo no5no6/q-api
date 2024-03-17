@@ -117,7 +117,7 @@ function authenticateToken(req, res, next) {
 
   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
     if (err) {
-      return sendError(res, 403, '登陆超时，请重新登陆') // 无效的token
+      return sendError(res, 401, '登陆超时，请重新登陆') // 无效的token
     }
  
     // req.user = user // 将解码的payload添加到请求中
