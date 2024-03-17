@@ -1,7 +1,8 @@
 const Questionnaire = require('../../models/questionnaire/index')
 const { sendSuccess, sendError } = require('../../utils/responseHandler')
+const { authenticateToken } = require('../../middleware/userValidate')
 
-app.get('/questionnaires', async (req, res) => {
+app.get('/questionnaires',authenticateToken, async (req, res) => {
   
   try {
     const questionnaires = await Questionnaire.retrieve()
